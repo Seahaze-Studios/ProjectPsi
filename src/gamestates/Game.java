@@ -1,4 +1,4 @@
-package core;
+package gamestates;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -10,7 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Game extends BasicGameState {
     private final int id;
-
+    private static GameContainer gc;
 
     public Game(int id) {
         this.id = id;
@@ -20,6 +20,7 @@ public class Game extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         // This code happens when you enter a game state for the *first time.*
         gc.setShowFPS(true);
+        this.gc = gc;
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -53,5 +54,7 @@ public class Game extends BasicGameState {
         return id;
     }
 
-
+    public static GameContainer getGc() {
+        return gc;
+    }
 }

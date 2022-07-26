@@ -1,24 +1,38 @@
 package core;
 
+import gamestates.Game;
+import gamestates.IntroCredit;
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.util.AbstractQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import static org.lwjgl.opengl.GL11.GL_VENDOR;
+
 public class Main extends StateBasedGame 
 {
-	public final static int FRAMES_PER_SECOND = 60;
+	public static StateBasedGame sbg;
 	private static AppGameContainer appgc;
 	
-    public static final int GAME_ID  = 0;
-    
-    private final BasicGameState game;
+    public static final int INTRO_ID  = 0;
+	public static final int GAME_ID = 1;
+	public static IntroCredit intro;
+	public static Game game;
+	
+	public static final UI UI = new UI();
+	public static Configuration config = new Configuration();
+
     
 	public Main(String name) 
 	{
 		super(name);
-		
+
+		intro = new IntroCredit(INTRO_ID);
 		game = new Game(GAME_ID);
 	}
 
@@ -35,6 +49,7 @@ public class Main extends StateBasedGame
 
 	public void initStatesList(GameContainer gc) throws SlickException 
 	{
+		addState(intro);
 		addState(game);
 	}
 
@@ -42,13 +57,14 @@ public class Main extends StateBasedGame
 	{
 		try 
 		{
-			appgc = new AppGameContainer(new Main("Unnamed Game"));
+			appgc = new AppGameContainer(new Main("Project Psi"));
+			config.init(appgc);
 			System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
 		
-			appgc.setDisplayMode(appgc.getScreenWidth(), appgc.getScreenHeight(), false);
-			appgc.setTargetFrameRate(FRAMES_PER_SECOND);
+			appgc.setDisplayMode(config.RESOLUTION_X, config.RESOLUTION_Y, false);
+			appgc.setTargetFrameRate(config.FRAMES_PER_SECOND);
+			appgc.setVSync(config.VSYNC);
 			appgc.start();
-			appgc.setVSync(true);
 
 		} 
 		catch (SlickException e) 

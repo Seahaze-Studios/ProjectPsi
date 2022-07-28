@@ -1,5 +1,6 @@
 package core;
 
+import entities.Entity;
 import gamestates.Game;
 import gamestates.IntroCredit;
 import org.lwjgl.opengl.GL11;
@@ -10,6 +11,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.AbstractQueue;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static org.lwjgl.opengl.GL11.GL_VENDOR;
@@ -25,6 +27,7 @@ public class Main extends StateBasedGame
 	public static Game game;
 	
 	public static final UI UI = new UI();
+	public static final Queue<Entity> entities = new ConcurrentLinkedQueue<>();
 	public static Configuration config = new Configuration();
 
     

@@ -1,5 +1,9 @@
 package gamestates;
 
+import components.TestSword;
+import components.Weapon;
+import entities.Entity;
+import entities.TestEntity;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,6 +15,9 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Game extends BasicGameState {
     private final int id;
     private static GameContainer gc;
+
+    private Entity entity = new TestEntity();
+    private Weapon weapon;
 
     public Game(int id) {
         this.id = id;
@@ -24,7 +31,7 @@ public class Game extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-
+        weapon.render(gc);
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -33,6 +40,8 @@ public class Game extends BasicGameState {
 
     public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException {
         // This code happens when you enter a gameState.
+        weapon = new TestSword(entity);
+        entity.setPos(400, 400);
     }
 
     public void leave(GameContainer gc, StateBasedGame sbg) {

@@ -55,4 +55,20 @@ public abstract class Entity implements Serializable {
     public Rectangle getHitbox() {
         return hitbox;
     }
+
+    public void setPos(Vector2f pos) {
+        this.pos = pos;
+    }
+
+    public void setPos(float x, float y) {
+        this.pos.set(x, y);
+    }
+
+    public void setX(float x) {
+        this.pos.set(x, this.pos.y);
+    }
+
+    public void setY(float y) {
+        this.pos.set(this.pos.x, y);
+    }
 }

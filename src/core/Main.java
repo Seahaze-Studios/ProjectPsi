@@ -27,7 +27,7 @@ public class Main extends StateBasedGame
 	public static Game game;
 	
 	public static final UI UI = new UI();
-	public static final Queue<Entity> entities = new ConcurrentLinkedQueue<>();
+
 	public static Configuration config = new Configuration();
 
     
